@@ -14,9 +14,8 @@
  * @var \App\View\AppView $this
  */
 
-$cakeDescription = 'Meetup Test';
+$cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,27 +27,32 @@ $cakeDescription = 'Meetup Test';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700') ?>
-    <?= $this->Html->css('https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz',[
-        'crossorigin'=>"anonymous"
-    ]) ?>
-    <?= $this->Html->css('registration') ?>
+    <?= $this->Html->css('base.css') ?>
+    <?= $this->Html->css('style.css') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <div class="main-block">
-        <?= $this->fetch('content');?>
+    <nav class="top-bar expanded" data-topbar role="navigation">
+        <ul class="title-area large-3 medium-4 columns">
+            <li class="name">
+                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
+            </li>
+        </ul>
+        <div class="top-bar-section">
+            <ul class="right">
+                <li><a target="_blank" href="https://book.cakephp.org/3/">Documentation</a></li>
+                <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
+            </ul>
+        </div>
+    </nav>
+    <?= $this->Flash->render() ?>
+    <div class="container clearfix">
+        <?= $this->fetch('content') ?>
     </div>
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <?= $this->Html->script([
-        '../vendors/plugins/bower_components/jquery/dist/jquery.min',
-        'jquery.validate.js'
-    ])?>
-    <?= $this->fetch('scriptBottom');?>
+    <footer>
+    </footer>
 </body>
 </html>
