@@ -9,7 +9,7 @@ The framework source code can be found here: [cakephp/cakephp](https://github.co
 
 ## Installation
 
-1. git https://github.com/mayank597/meetup_test.git
+1. git clone https://github.com/mayank597/meetup_test.git
 2. Run `composer update`.
 3. Create tmp and logs folder and give permission
 4. run mysql file in EXTRA/meetup_test.sql
