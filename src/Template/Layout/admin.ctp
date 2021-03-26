@@ -35,6 +35,15 @@ $cakeDescription = 'Meetup Test';
     ]) ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+
+    <style type="text/css">
+        .pagination li {
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+            
+    </style>
+
 </head>
 <body>
     <!-- ============================================================== -->

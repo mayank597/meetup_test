@@ -12,6 +12,22 @@ use App\Controller\AppController;
  */
 class ParticipantsController extends AppController
 {
+    public $paginate = [
+        'limit' => 2,
+        'order' => [
+            'id' => 'desc'
+        ]
+    ];
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('RequestHandler');
+        $this->loadComponent('Paginator');
+
+        $this->viewBuilder()->setLayout('admin');
+    }
+
     /**
      * Index method
      *
@@ -19,46 +35,27 @@ class ParticipantsController extends AppController
      */
     public function index()
     {
-        $participants = $this->paginate($this->Participants);
-
-        $this->set(compact('participants'));
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Participant id.
-     * @return \Cake\Http\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $participant = $this->Participants->get($id, [
-            'contain' => [],
-        ]);
-
-        $this->set('participant', $participant);
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $participant = $this->Participants->newEntity();
-        if ($this->request->is('post')) {
-            $participant = $this->Participants->patchEntity($participant, $this->request->getData());
-            if ($this->Participants->save($participant)) {
-                $this->Flash->success(__('The participant has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The participant could not be saved. Please, try again.'));
+        $queryData = $this->request->getQuery();
+        $query = $this->Participants->find('all');
+        if(!empty($queryData['name'])){
+            $query->where(['name' => $queryData['name']]);
         }
-        $this->set(compact('participant'));
+        else {
+            $queryData['name'] = '';
+        }
+
+        if(!empty($queryData['locality'])){
+            $query->where(['locality' => $queryData['locality']]);
+        }
+        else{
+            $queryData['locality'] = '';
+        }
+
+        $participants = $this->paginate($query);
+        $this->set(compact('participants','queryData'));
     }
+
+    
 
     /**
      * Edit method
@@ -72,35 +69,6 @@ class ParticipantsController extends AppController
         $participant = $this->Participants->get($id, [
             'contain' => [],
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $participant = $this->Participants->patchEntity($participant, $this->request->getData());
-            if ($this->Participants->save($participant)) {
-                $this->Flash->success(__('The participant has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The participant could not be saved. Please, try again.'));
-        }
         $this->set(compact('participant'));
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Participant id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $participant = $this->Participants->get($id);
-        if ($this->Participants->delete($participant)) {
-            $this->Flash->success(__('The participant has been deleted.'));
-        } else {
-            $this->Flash->error(__('The participant could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
     }
 }

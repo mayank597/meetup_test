@@ -1,6 +1,6 @@
-var Registration = function(){
+var Participant = function(){
 	return {
-		submit : function(registrationApi){
+		update : function(updateApi){
 			let dob = new Date($('#dob').val());
 			if(dob.toString() == 'Invalid Date'){
 				alert('Dob of birth format is incorrect');
@@ -14,21 +14,15 @@ var Registration = function(){
 				profession : $('input[name="profession"]:checked').val(),
 				number_of_guests : $('#no_of_guests').val(),
 				address : $('#address').val(),
+				_method : "PUT"
 			}
 
 			var parameter = {
-                url: registrationApi,
+				type: 'POST',
+                url: updateApi,
                 data: postObj,
-                type: 'POST',
                 dataType: 'JSON',
                 success: function(response) {
-                    if(response.success){
-                    	$('#name').val('')
-                    	$('#dob').val('')
-                    	$('#locality').val('')
-                    	$('#no_of_guests').val('')
-                    	$('#address').val('')
-                    }
                     alert(response.message);
                 }
             };

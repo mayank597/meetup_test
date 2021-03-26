@@ -1,4 +1,7 @@
 <?= $this->Html->script('custom/registration',['block' => true]); ?>
+<?php 
+$registrationApi = \Cake\Routing\Router::url("http://localhost/meetup_test/api/participants.json");
+?>
 <h1>Registration</h1>
 <form action="/" onsubmit="return false;">
     <hr>
@@ -6,7 +9,7 @@
     <input type="text" name="name" id="name" placeholder="Name"/>
 
     <label class="icon" for="name"><i class="fas fa-calendar "></i></label>
-    <input type="text" name="dob" id="dob" placeholder="DOB"/>
+    <input type="text" name="dob" id="dob" placeholder="MM/DD/YYYY"/>
 
     <label class="icon" for="locality"><i class="fas fa-map-marker"></i></label>
     <input type="text" name="locality" id="locality" placeholder="Locality" />
@@ -14,7 +17,7 @@
     <label class="icon" for="no_of_guests"><i class="fas fa-user"></i></label>
     <input type="number" name="no_of_guests" id="no_of_guests" placeholder="Number of Guests" />
 
-    <textarea name="address" class="registration-textarea" placeholder="Address" ></textarea>
+    <textarea name="address" id="address" class="registration-textarea" placeholder="Address" ></textarea>
 
     <hr>
     <div class="account-type">
@@ -25,6 +28,6 @@
     </div>
     <hr>
     <div class="btn-block">
-        <button type="submit" onclick="Registration.submit();">Submit</button>
+        <button type="submit" onclick="Registration.submit('<?= $registrationApi;?>');">Submit</button>
     </div>
 </form>

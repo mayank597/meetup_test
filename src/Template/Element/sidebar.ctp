@@ -12,7 +12,9 @@
                         $linkHtml = '<i class="fa fa-user" aria-hidden="true"></i>
                         <span class="hide-menu">Participants</span>';
                         echo $this->Html->link($linkHtml,[
-                            'controller' => 'Participants'
+                            'controller' => 'Participants',
+                            'prefix' => 'admin',
+                            'action' => 'index'
                         ],[
                             'class' => 'sidebar-link waves-effect waves-dark sidebar-link',
                             'escape' => false

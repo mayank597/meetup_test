@@ -45,11 +45,26 @@ use Cake\Routing\Route\DashedRoute;
  */
 Router::defaultRouteClass(DashedRoute::class);
 
+Router::prefix('admin', function (RouteBuilder $routes) {
+    // All routes here will be prefixed with `/admin`
+    // And have the prefix => admin route element added.
+    $routes->fallbacks(DashedRoute::class);
+});
+
+Router::scope('/api', function (RouteBuilder $routes) {
+    // Prior to 3.5.0 use `extensions()`
+    $routes->setExtensions(['json']);
+    $routes->resources('Participants');
+
+});
+
 Router::scope('/', function (RouteBuilder $routes) {
     // Register scoped middleware for in scopes.
     $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware([
         'httpOnly' => true,
     ]));
+
+
 
     /*
      * Apply a middleware to the current route scope.

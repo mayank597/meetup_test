@@ -49,34 +49,50 @@ class ParticipantsTable extends Table
 
         $validator
             ->scalar('name')
+            ->requirePresence('name','create')
             ->maxLength('name', 50)
-            ->allowEmptyString('name');
+            ->notEmpty('name','Name is required.');
 
         $validator
-            ->boolean('age')
-            ->allowEmptyString('age');
+            ->integer('age')            
+            ->notEmpty('age');
 
         $validator
             ->date('dob')
-            ->allowEmptyDate('dob');
+            ->requirePresence('dob')
+            ->notEmptyString('dob','Name is required.');
 
         $validator
             ->scalar('profession')
-            ->allowEmptyString('profession');
+            ->requirePresence('profession','create')
+            ->inList('profession', ['Employed','Student'])
+            ->notEmpty('profession','Profession is required.');
 
         $validator
             ->scalar('locality')
             ->maxLength('locality', 200)
-            ->allowEmptyString('locality');
+            ->requirePresence('locality','create')
+            ->notEmptyString('locality','Locality is required.');
 
         $validator
-            ->boolean('number_of_guests')
-            ->allowEmptyString('number_of_guests');
+            ->integer('number_of_guests')
+            ->requirePresence('number_of_guests','create')
+            ->add('number_of_guests','custom',[
+                'rule' => function ($value, $context){
+                    if($value > 2){
+                        return false;
+                    }
+                    return true;
+                },
+                'message' => 'You can bring +2 only with you.'
+            ])
+            ->notEmpty('number_of_guests','Tell us about count of guest.');
 
         $validator
             ->scalar('address')
+            ->requirePresence('address','create')
             ->maxLength('address', 50)
-            ->allowEmptyString('address');
+            ->allowEmptyString('address');           
 
         return $validator;
     }
