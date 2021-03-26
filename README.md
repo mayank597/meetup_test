@@ -9,7 +9,7 @@ The framework source code can be found here: [cakephp/cakephp](https://github.co
 
 ## Installation
 
-1. git clone https://github.com/mayank597/meetup_test.git
+1. git https://github.com/mayank597/meetup_test.git
 2. Run `composer update`.
 3. Create tmp and logs folder and give permission
 4. run mysql file in EXTRA/meetup_test.sql
@@ -24,6 +24,15 @@ bin/cake server -p 8765
 ```
 
 Then visit `http://localhost:8765` to see the welcome page.
+
+Then visit `http://localhost:8765/admin/` to see the Admin List and Search Option With Edit participant.
+
+
+## API URLS
+
+1. /api/participants.json POST (Registration Api)
+2. /api/participants.json GET (List Api)
+3. /api/participants/{participant_id}.json PUT (Update Api)
 
 ## Update
 
