@@ -22,6 +22,7 @@ var Participant = function(){
                 url: updateApi,
                 data: postObj,
                 dataType: 'JSON',
+                crossDomain: true,
                 success: function(response) {
                     alert(response.message);
                 }

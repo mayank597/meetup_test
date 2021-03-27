@@ -21,6 +21,7 @@ var Registration = function(){
                 data: postObj,
                 type: 'POST',
                 dataType: 'JSON',
+                crossDomain: true,
                 success: function(response) {
                     if(response.success){
                     	$('#name').val('')

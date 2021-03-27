@@ -9,11 +9,12 @@ The framework source code can be found here: [cakephp/cakephp](https://github.co
 
 ## Installation
 
-1. git https://github.com/mayank597/meetup_test.git
-2. Run `composer update`.
-3. Create tmp and logs folder and give permission
-4. run mysql file in EXTRA/meetup_test.sql
-5. Set databse credentials in config/app_local.php
+1. git clone https://github.com/mayank597/meetup_test.git
+2. cd meetup_test
+3. Run `composer update`.
+4. Create tmp and logs folder and give permission
+5. run mysql file in EXTRA/meetup_test.sql
+6. Set databse credentials in config/app_local.php
 
 
 You can now either use your machine's webserver to view the default home page, or start
