@@ -28,6 +28,8 @@ Then visit `http://localhost:8765` to see the welcome page.
 
 Then visit `http://localhost:8765/admin/` to see the Admin List and Search Option With Edit participant.
 
+If you are seeing some file writing error then stop bake server and make sure to give permisson to logs folder and tmp folder
+
 
 ## API URLS
 
